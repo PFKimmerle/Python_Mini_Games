@@ -1,0 +1,39 @@
+stateDiagram-v2
+    [*] --> GameStart
+    GameStart --> Introduction
+    Introduction --> MainCave : choice == "yes"
+    Introduction --> GameOver : choice == "no"
+    Introduction --> InvalidInput : invalid input
+    
+    MainCave --> NarrowPassage : choice == "left"
+    MainCave --> DarkTunnel : choice == "right"
+    MainCave --> EeriePath : choice == "straight"
+    MainCave --> InvalidInput : invalid input
+    
+    NarrowPassage --> TreasureFound
+    DarkTunnel --> GameOver
+    
+    EeriePath --> Door1 : choice == "1"
+    EeriePath --> Door2 : choice == "2"
+    EeriePath --> Door3 : choice == "3"
+    EeriePath --> InvalidInput : invalid input
+    
+    Door1 --> ValuableFind
+    Door2 --> EmptyRoom
+    Door3 --> GameOver
+    
+    TreasureFound --> PlayAgain
+    ValuableFind --> PlayAgain
+    EmptyRoom --> PlayAgain
+    GameOver --> PlayAgain
+    
+    PlayAgain --> GameStart : choice == "yes"
+    PlayAgain --> Exit : choice == "no"
+    PlayAgain --> InvalidInput : invalid input
+    
+    InvalidInput --> Introduction : in introduction
+    InvalidInput --> MainCave : in main_cave
+    InvalidInput --> EeriePath : in eerie_path
+    InvalidInput --> PlayAgain : in play_again
+    
+    Exit --> [*]
