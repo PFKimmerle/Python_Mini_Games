@@ -1,0 +1,15 @@
+flowchart TD
+    Start([Start]) --> Introduction
+    Introduction("Introduction()") --> EnterLumina("enter_lumina()")
+    EnterLumina --> Quest1("quest1_candy_forest()")
+    Quest1 --> |Success| Quest2("quest2_misunderstood_creature()")
+    Quest1 --> |Failure| PlayAgain("play_again()")
+    Quest2 --> Quest3("quest3_ancient_ruins()")
+    Quest3 --> |dragon_trust = True| ConcludeAdventure("conclude_adventure()")
+    Quest3 --> |dragon_trust = False| ConcludeAdventure
+    ConcludeAdventure --> |all_quests_success = True| Victory("Victory")
+    ConcludeAdventure --> |all_quests_success = False| Failure("Failure")
+    Victory --> PlayAgain
+    Failure --> PlayAgain
+    PlayAgain --> |Yes| EnterLumina
+    PlayAgain --> |No| End([End])
